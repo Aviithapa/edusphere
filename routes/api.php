@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Facades\Notifier;
+use App\Http\Controllers\SuperAdmin\NotificationController;
 use App\Notifications\SiteInstallationSucceed;
 
 Route::get('/', function () {
