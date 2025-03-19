@@ -43,14 +43,30 @@ class NotificationChannel extends Model
         /** @var \App\NotificationChannels\NotificationChannel $provider */
         $provider = new $class($this);
 
+
         return $provider;
+    }
+
+    public function notify(NotificationInterface $notification)
+    {
+        // Find the correct channel class and call send()
+        $provider = $this->provider;
+        $channelClass = '\\App\\NotificationChannels\\' . ucfirst($provider);
+
+        if (!class_exists($channelClass)) {
+            Log::error("Notification channel class $channelClass does not exist.");
+            return;
+        }
+
+        $channelInstance = new $channelClass($this);
+        $channelInstance->send($this, $notification);
     }
 
     public static function notifyAll(NotificationInterface $notification): void
     {
         $channels = self::all();
         foreach ($channels as $channel) {
-            Log::info('Notifying channel: ' . $channel->provider);
+
             $channel->notify($notification);
         }
     }

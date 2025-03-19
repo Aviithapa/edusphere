@@ -7,14 +7,11 @@ namespace App\Notifications;
 class SiteInstallationSucceed extends AbstractNotification
 {
 
+    public function __construct(protected Object $server) {}
+
     public function rawText(): string
     {
-        return __('Installation succeed for site');
-    }
-
-    public function toSlack(object $notifiable): string
-    {
-        return 'This is a test Slack notification from Laravel!';
+        return "Installation succeeded for site: {$this->server->name} (IP: {$this->server->ip})";
     }
 
 }

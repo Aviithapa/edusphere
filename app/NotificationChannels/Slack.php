@@ -4,7 +4,6 @@ namespace App\NotificationChannels;
 
 use App\Models\NotificationChannel;
 use App\Notifications\NotificationInterface;
-use App\Web\Pages\Settings\NotificationChannels\Index;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -76,7 +75,6 @@ class Slack extends AbstractNotificationChannel
             'text' => $notification->toSlack($notifiable),
         ]);
 
-        Log::info('Slack response: ', $response->json());
 
     }
 }

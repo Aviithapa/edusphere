@@ -10,7 +10,7 @@ Route::get('/', function () {
         'name' => 'Server 1',
         'ip'   => '127.0.0.1'
     ];
-    $notifier =  Notifier::send($server, new SiteInstallationSucceed());
+    $notifier =  Notifier::send($server, new SiteInstallationSucceed($server));
 
     return $notifier;
 });
