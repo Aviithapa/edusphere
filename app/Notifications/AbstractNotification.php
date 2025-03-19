@@ -40,4 +40,10 @@ abstract class AbstractNotification extends Notification implements Notification
     {
         return $this->rawText();
     }
+
+    public function toSms(object $notifiable): string
+    {
+        return $this->rawText();
+    }
+
 }
